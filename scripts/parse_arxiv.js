@@ -1,16 +1,19 @@
-const API_URL =
-  'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=1000';
-
 // const API_URL =
-//   'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=lastUpdatedDate&sortOrder=descending&max_results=50';
+//   'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=100';
+
 
 async function fetchPapers() {
   try {
-    const res = await fetch(API_URL);
-    const text = await res.text();
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, 'application/xml');
-    const entries = Array.from(xml.querySelectorAll('entry'));
+    // const res = await fetch(API_URL);
+    // const text = await res.text();
+    // const parser = new DOMParser();
+    // const xml = parser.parseFromString(text, 'application/xml');
+    // const entries = Array.from(xml.querySelectorAll('entry'));
+
+    // Fetch the pre‑built JSON instead of the XML API feed
+    const res = await fetch('/data/arxiv.json');
+    const data = await res.json();
+    const entries = Array.isArray(data) ? data : [data];
 
     const clusterEntries = entries.filter(entry => {
       const title = entry.querySelector('title').textContent.toLowerCase();
