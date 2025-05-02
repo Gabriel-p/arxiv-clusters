@@ -5,13 +5,6 @@ run-name: Fetching arxiv data
 on:
   [push]
 
-  schedule:
-    # every hour at minute 0 UTC
-    - cron: '0 * * * *'
-  
-  # Allow manual triggering
-  workflow_dispatch:
-
 jobs:
   fetch-arxiv:
     runs-on: ubuntu-latest
