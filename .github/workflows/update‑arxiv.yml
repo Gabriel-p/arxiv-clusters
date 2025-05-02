@@ -25,9 +25,9 @@ jobs:
       # 2) prepare Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
+        # with:
+        #   node-version: '18'
+        #   cache: 'npm'
 
       # 3) install your xml2js + node-fetch (or yarn)
       # - name: Install dependencies
