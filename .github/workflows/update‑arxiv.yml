@@ -1,8 +1,8 @@
 name: Refresh arXiv data
 
-# run at minute 0 of every hour (UTC)
 on:
   schedule:
+    # every hour at minute 0 UTC
     - cron: '0 * * * *'
   
   # Allow manual triggering
@@ -13,35 +13,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) get all branches + history so that future commits will work
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+        with:
+          fetch-depth: 0
+
+      # 2) prepare Node
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: 'npm'
 
+      # 3) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
+      # 4) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
-        run: node scripts/fetch-arxiv.js
+        run: |
+          echo "→ running scripts/fetch-arxiv.js"
+          node ./scripts/fetch-arxiv.js
+        shell: bash
 
+      # 5) debug: show the folder tree so we know “data/arxiv.json” is there
+      - name: List repository contents
+        run: ls -R .
+
+      # 6) debug: print the first few lines of the JSON (or note if missing)
+      - name: Show data/arxiv.json
+        if: always()
+        run: |
+          if [ -f data/arxiv.json ]; then
+            echo "--- data/arxiv.json exists, head of file: ---"
+            head -n 20 data/arxiv.json
+          else
+            echo "⚠️ data/arxiv.json not found!"
+            exit 1
+          fi
+
+      # 7) detect whether data/arxiv.json changed
       - name: Check for changes in data
         id: check-changes
         run: |
           git add data/arxiv.json
-          if ! git diff --staged --quiet; then
-            echo "changes=true" >> $GITHUB_OUTPUT
+          # git diff --cached returns non-zero if there are staged changes
+          if git diff --cached --quiet; then
+            echo "changes=false" >> "$GITHUB_OUTPUT"
           else
-            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "changes=true"  >> "$GITHUB_OUTPUT"
           fi
-      
+
+      # 8) commit & push only when JSON changed
       - name: Commit and push if changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Update arXiv data" data/arxiv.json
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git commit -m "ci: update arXiv data" data/arxiv.json
           git push
