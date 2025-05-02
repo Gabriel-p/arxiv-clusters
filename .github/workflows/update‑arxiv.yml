@@ -1,0 +1,39 @@
+name: Refresh arXiv data
+
+# run at minute 0 of every hour (UTC)
+on:
+  schedule:
+    - cron:  '0 * * * *'
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0   # required to amend history
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch arXiv feed & write JSON
+        run: node scripts/fetch-arxiv.js
+
+      - name: Commit updated JSON
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'ci: update arXiv data'
+          file_pattern: 'data/arxiv.json'
+          branch:        ${{ github.ref_name }}
+
+      # (Optional) If your Pages branch is different:
+      # - name: Push to gh-pages
+      #   run: |
+      #     git push origin HEAD:gh-pages
