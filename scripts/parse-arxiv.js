@@ -16,6 +16,7 @@ async function fetchPapers() {
     const entries = Array.isArray(data) ? data : [data];
 
     const clusterEntries = entries.filter(entry => {
+      console.log(entry)
       const title = entry.querySelector('title').textContent.toLowerCase();
       const summary = entry.querySelector('summary').textContent.toLowerCase();
       return title.includes('open cluster') || title.includes('star cluster') || title.includes('stellar cluster') || summary.includes('open cluster') || summary.includes('star cluster') || summary.includes('stellar cluster');
