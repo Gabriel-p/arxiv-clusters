@@ -1,6 +1,10 @@
 name: Refresh arXiv data
 
+run-name: Fetching arxiv data
+
 on:
+  [push]
+
   schedule:
     # every hour at minute 0 UTC
     - cron: '0 * * * *'
@@ -33,7 +37,7 @@ jobs:
       # 4) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
         run: |
-          echo "→ running scripts/fetch-arxiv.js"
+          echo "running scripts/fetch-arxiv.js"
           node ./scripts/fetch-arxiv.js
         shell: bash
 
