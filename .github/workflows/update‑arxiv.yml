@@ -29,7 +29,7 @@ jobs:
         #   node-version: '18'
         #   cache: 'npm'
 
-      3) install your xml2js + node-fetch (or yarn)
+      # 3) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
         run: npm install
 
