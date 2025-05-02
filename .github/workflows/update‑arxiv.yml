@@ -31,7 +31,7 @@ jobs:
 
       # 3) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm install
 
       # 4) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
