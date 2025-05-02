@@ -3,37 +3,45 @@ name: Refresh arXiv data
 # run at minute 0 of every hour (UTC)
 on:
   schedule:
-    - cron:  '0 * * * *'
-  workflow_dispatch:  # allows manual trigger
+    - cron: '0 * * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
 
 jobs:
-  fetch-and-commit:
+  fetch-arxiv:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0   # required to amend history
-
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci || npm install
 
-      - name: Fetch arXiv feed & write JSON
+      - name: Run fetch-arxiv script
         run: node scripts/fetch-arxiv.js
 
-      - name: Commit updated JSON
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'ci: update arXiv data'
-          file_pattern: 'data/arxiv.json'
-          branch:        ${{ github.ref_name }}
-
-      # (Optional) If your Pages branch is different:
-      # - name: Push to gh-pages
-      #   run: |
-      #     git push origin HEAD:gh-pages
+      - name: Check for changes in data
+        id: check-changes
+        run: |
+          git add data/arxiv.json
+          if ! git diff --staged --quiet; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push if changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update arXiv data" data/arxiv.json
+          git push
