@@ -1,5 +1,5 @@
 const API_URL =
-  'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=50';
+  'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=1000';
 
 // const API_URL =
 //   'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=lastUpdatedDate&sortOrder=descending&max_results=50';
@@ -15,7 +15,7 @@ async function fetchPapers() {
     const clusterEntries = entries.filter(entry => {
       const title = entry.querySelector('title').textContent.toLowerCase();
       const summary = entry.querySelector('summary').textContent.toLowerCase();
-      return title.includes('open cluster') || summary.includes('cluster');
+      return title.includes('open cluster') || title.includes('star cluster') || title.includes('stellar cluster') || summary.includes('open cluster') || summary.includes('star cluster') || summary.includes('stellar cluster');
     });
 
     const list = document.getElementById('papers');
