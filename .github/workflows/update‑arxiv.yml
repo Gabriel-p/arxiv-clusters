@@ -11,6 +11,9 @@ on:
   # Allow manual triggering
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
 
   fetch-arxiv:
@@ -93,8 +96,6 @@ jobs:
       #     git push
 
       - name: Commit and push if changes
-        permissions:
-          contents: write
         if: steps.check-changes.outputs.changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
