@@ -14,7 +14,7 @@ async function main() {
   await fs.writeFile(
     'data/arxiv.json',
     JSON.stringify(obj.feed.entry, null, 2),
-    'utf‑8'
+    'utf-8'
   );
 }
 
