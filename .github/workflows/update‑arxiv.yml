@@ -40,7 +40,7 @@ jobs:
             npm install
           fi
 
-      # 3) install your xml2js + node-fetch (or yarn)
+      # 4) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
         run: npm ci
 
@@ -51,18 +51,18 @@ jobs:
           echo "Checking node-fetch version"
           npm list node-fetch
 
-      # 4) run the fetch script & fail early if it errors
+      # 5) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
         run: |
           echo "running scripts/fetch-arxiv.js"
           node ./scripts/fetch-arxiv.js
         shell: bash
 
-      # 5) debug: show the folder tree so we know “data/arxiv.json” is there
+      # 6) debug: show the folder tree so we know “data/arxiv.json” is there
       - name: List repository contents
         run: ls -R .
 
-      # 6) debug: print the first few lines of the JSON (or note if missing)
+      # 7) debug: print the first few lines of the JSON (or note if missing)
       - name: Show data/arxiv.json
         if: always()
         run: |
@@ -74,7 +74,7 @@ jobs:
             exit 1
           fi
 
-      # 7) detect whether data/arxiv.json changed
+      # 8) detect whether data/arxiv.json changed
       - name: Check for changes in data
         id: check-changes
         run: |
@@ -86,15 +86,7 @@ jobs:
             echo "changes=true"  >> "$GITHUB_OUTPUT"
           fi
 
-      # 8) commit & push only when JSON changed
-      # - name: Commit and push if changes
-      #   if: steps.check-changes.outputs.changes == 'true'
-      #   run: |
-      #     git config user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config user.name  "github-actions[bot]"
-      #     git commit -m "ci: update arXiv data" data/arxiv.json
-      #     git push
-
+      # 9) commit & push only when JSON changed
       - name: Commit and push if changes
         if: steps.check-changes.outputs.changes == 'true'
         env:
