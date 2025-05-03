@@ -36,12 +36,20 @@ jobs:
             npm install
           fi
 
+      # 5) debug: show the folder tree so we know “data/arxiv.json” is there
+      - name: List repository contents
+        run: ls -R .
+
       # 3) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify dependencies
-        run: npm list node-fetch
+      - name: Debug installed dependencies
+        run: |
+          echo "Checking installed dependencies"
+          npm list
+          echo "Checking node-fetch version"
+          npm list node-fetch
 
       # 4) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
