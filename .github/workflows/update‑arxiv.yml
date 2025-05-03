@@ -13,10 +13,6 @@ on:
 
 jobs:
 
-  job-name:
-    permissions:
-      contents: write
-
   fetch-arxiv:
     runs-on: ubuntu-latest
 
@@ -97,6 +93,8 @@ jobs:
       #     git push
 
       - name: Commit and push if changes
+        permissions:
+          contents: write
         if: steps.check-changes.outputs.changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
