@@ -1,7 +1,7 @@
 async function fetchPapers() {
   try {
     // Fetch the pre‑built JSON instead of the XML API feed
-    const res = await fetch('/data/arxiv.json');
+    const res = await fetch('./data/arxiv.json');
     const data = await res.json();
     const entries = Array.isArray(data) ? data : [data];
 
