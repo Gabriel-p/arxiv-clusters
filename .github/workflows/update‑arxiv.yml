@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify dependencies
+        run: npm list node-fetch
+
       # 4) run the fetch script & fail early if it errors
       - name: Run fetch-arxiv script
         run: |
