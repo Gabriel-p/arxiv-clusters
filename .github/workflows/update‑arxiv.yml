@@ -29,6 +29,13 @@ jobs:
           node-version: '18'
         #   cache: 'npm'
 
+      # 3) Ensure package-lock.json exists
+      - name: Generate package-lock.json if missing
+        run: |
+          if [ ! -f package-lock.json ]; then
+            npm install
+          fi
+
       # 3) install your xml2js + node-fetch (or yarn)
       - name: Install dependencies
         run: npm ci
