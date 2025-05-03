@@ -1,6 +1,6 @@
 
 import { promises as fs } from 'fs';
-import fetch          from 'node‑fetch';
+import fetch          from 'node-fetch';
 import { parseStringPromise } from 'xml2js';
 
 const ARXIV_URL = 'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=100';
