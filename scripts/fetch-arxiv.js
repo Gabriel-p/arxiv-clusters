@@ -37,7 +37,7 @@ async function main() {
     ? sortedEntries 
     : [{
         title: 'No articles found',
-        id: 'https://arxiv.org/list/astro-ph/new',
+        id: '#',
         author: [
           {
             "name": " "
