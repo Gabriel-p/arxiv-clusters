@@ -1,9 +1,6 @@
 async function fetchPapers() {
   try {
-    // Use for local build
-    // const res = await fetch('/data/arxiv.json');
-    // Use for live build
-    const res = await fetch('./data/arxiv.json');
+    const res = await fetch('/data/arxiv.json');
     const data = await res.json();
     const entries = Array.isArray(data) ? data : [data];
 
