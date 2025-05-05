@@ -37,10 +37,10 @@ async function main() {
     ? sortedEntries 
     : [{
         title: 'No articles found',
-        link: 'https://arxiv.org/list/astro-ph/new',
-        authors: '',
+        id: 'https://arxiv.org/list/astro-ph/new',
+        author: ' ',
         updated: new Date().toISOString().split('T')[0],
-        abstract: 'No articles matching the filters found in the current submissions.'
+        summary: 'No articles matching the filters found in the current submissions.'
       }];
 
   // await fs.mkdir('data', { recursive: true });
