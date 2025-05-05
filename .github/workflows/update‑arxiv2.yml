@@ -63,14 +63,14 @@ jobs:
         run: ls -R .
 
       # 7) debug: print the first few lines of the JSON (or note if missing)
-      - name: Show data2/arxiv.json
+      - name: Show data/arxiv.json
         if: always()
         run: |
-          if [ -f data2/arxiv.json ]; then
-            echo "--- data2/arxiv.json exists, head of file: ---"
-            head -n 20 data2/arxiv.json
+          if [ -f data/arxiv.json ]; then
+            echo "--- data/arxiv.json exists, head of file: ---"
+            head -n 20 data/arxiv.json
           else
-            echo "⚠️ data2/arxiv.json not found!"
+            echo "⚠️ data/arxiv.json not found!"
             exit 1
           fi
 
@@ -78,7 +78,7 @@ jobs:
       - name: Check for changes in data
         id: check-changes
         run: |
-          git add data2/arxiv.json
+          git add data/arxiv.json
           # git diff --cached returns non-zero if there are staged changes
           if git diff --cached --quiet; then
             echo "changes=false" >> "$GITHUB_OUTPUT"
@@ -94,5 +94,5 @@ jobs:
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git commit -m "ci: update arXiv data" data2/arxiv.json
+          git commit -m "ci: update arXiv data" data/arxiv.json
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:main
