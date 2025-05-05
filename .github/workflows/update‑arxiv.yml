@@ -1,10 +1,10 @@
-name: Refresh arXiv data
+name: Generate arxiv JSON file
 
-run-name: Fetching arxiv data
+run-name: Fetching arxiv data (new)
 
 on:
-  # push:
-  #   branches: ["main" ]
+  push:
+    branches: ["main" ]
   schedule:
     # every 6 hours at minute 0 UTC
     - cron: '0 */6 * * *'
@@ -52,10 +52,10 @@ jobs:
           npm list node-fetch
 
       # 5) run the fetch script & fail early if it errors
-      - name: Run fetch-arxiv script
+      - name: Run fetch-arxiv2 script
         run: |
-          echo "running scripts/fetch-arxiv.js"
-          node ./scripts/fetch-arxiv.js
+          echo "running scripts/fetch-arxiv2.js"
+          node ./scripts/fetch-arxiv2.js
         shell: bash
 
       # 6) debug: show the folder tree so we know “data/arxiv.json” is there
