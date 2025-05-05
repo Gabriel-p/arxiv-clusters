@@ -43,9 +43,9 @@ async function main() {
         abstract: 'No articles matching the filters found in the current submissions.'
       }];
 
-  await fs.mkdir('data', { recursive: true });
+  // await fs.mkdir('data', { recursive: true });
   await fs.writeFile(
-    'data/arxiv.json',
+    'arxiv.json',
     JSON.stringify(entriesToSave, null, 2),
     'utf-8'
   );
