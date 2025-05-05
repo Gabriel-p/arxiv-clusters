@@ -39,9 +39,9 @@ async function main() {
 
   // console.log(entriesToSave)
 
-  await fs.mkdir('data2', { recursive: true });
+  await fs.mkdir('data', { recursive: true });
   await fs.writeFile(
-    'data2/arxiv.json',
+    'data/arxiv.json',
     JSON.stringify(entriesToSave, null, 2),
     'utf-8'
   );
