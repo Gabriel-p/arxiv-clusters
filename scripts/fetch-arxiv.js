@@ -35,7 +35,13 @@ async function main() {
   // If no entries are to be saved, save a placeholder entry
   const entriesToSave = sortedEntries.length > 0 
     ? sortedEntries 
-    : [{ title: 'No articles found', link: '', authors: '', updated: '', abstract: '' }];
+    : [{
+        title: 'No articles found',
+        link: 'https://arxiv.org/list/astro-ph/new',
+        authors: '',
+        updated: new Date().toISOString(),
+        abstract: 'No articles matching the filters found in the current submissions.'
+      }];
 
   await fs.mkdir('data', { recursive: true });
   await fs.writeFile(
