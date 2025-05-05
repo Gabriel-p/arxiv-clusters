@@ -38,7 +38,7 @@ async function main() {
     : [{
         title: 'No articles found',
         id: 'https://arxiv.org/list/astro-ph/new',
-        author: ' ',
+        author: '',
         updated: new Date().toISOString().split('T')[0],
         summary: 'No articles matching the filters found in the current submissions.'
       }];
