@@ -52,9 +52,9 @@ jobs:
           npm list node-fetch
 
       # 5) run the fetch script & fail early if it errors
-      - name: Run fetch-arxiv script
+      - name: Run fetch-arxiv2 script
         run: |
-          echo "running scripts/fetch-arxiv.js"
+          echo "running scripts/fetch-arxiv2.js"
           node ./scripts/fetch-arxiv2.js
         shell: bash
 

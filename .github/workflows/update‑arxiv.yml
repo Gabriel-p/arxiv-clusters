@@ -3,8 +3,8 @@ name: Refresh arXiv data
 run-name: Fetching arxiv data
 
 on:
-  push:
-    branches: ["main" ]
+  # push:
+  #   branches: ["main" ]
   schedule:
     # every 6 hours at minute 0 UTC
     - cron: '0 */6 * * *'
