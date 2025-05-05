@@ -25,6 +25,8 @@ async function main() {
         if (summary.includes(keyword)) score += 1;
       });
 
+      console.log(entry.title, score)
+
       return { ...entry, score };
     })
     .filter(entry => entry.score > 0); // Exclude entries with score=0
@@ -38,9 +40,13 @@ async function main() {
     : [{
         title: 'No articles found',
         id: 'https://arxiv.org/list/astro-ph/new',
-        author: '',
+        author: [
+          {
+            "name": " "
+          }
+        ],
         updated: new Date().toISOString().split('T')[0],
-        summary: 'No articles matching the filters found in the current submissions.'
+        summary: 'No articles matching the filters were found in the current submissions.'
       }];
 
   // await fs.mkdir('data', { recursive: true });

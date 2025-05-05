@@ -1,8 +1,11 @@
 async function fetchPapers() {
   try {
-    // const res = await fetch('arxiv.json');
+
+    // For local build
+    // const res = await fetch('/arxiv.json');
     // For live build
     const res = await fetch('/arxiv-clusters/arxiv.json');
+
     const data = await res.json();
     const entries = Array.isArray(data) ? data : [data];
 
