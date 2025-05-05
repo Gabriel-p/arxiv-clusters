@@ -32,12 +32,10 @@ async function main() {
   // Sort entries by score in descending order
   const sortedEntries = scoredEntries.sort((a, b) => b.score - a.score);
 
-  // console.log(sortedEntries)
-
   // If no entries are to be saved, save a placeholder entry
-  const entriesToSave = sortedEntries.length > 0 ? sortedEntries : [{ title: 'No articles found' }];
-
-  // console.log(entriesToSave)
+  const entriesToSave = sortedEntries.length > 0 
+    ? sortedEntries 
+    : [{ title: 'No articles found', link: '', authors: '', updated: '', abstract: '' }];
 
   await fs.mkdir('data', { recursive: true });
   await fs.writeFile(
