@@ -63,10 +63,7 @@ plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   # - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
   # - jekyll-seo-tag
-#   - jekyll-paginate
-
-# paginate: 5  # Number of posts per page
-# paginate_path: "/page:num/"  # URL structure for paginated pages
+  # - jekyll-paginate
 
 relative_links:
   enabled:     false
