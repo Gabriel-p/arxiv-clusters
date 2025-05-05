@@ -1,6 +1,6 @@
 name: Generate arxiv JSON file
 
-run-name: Fetching arxiv data
+run-name: Fetching arxiv data (new)
 
 on:
   push:
