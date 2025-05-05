@@ -1,9 +1,9 @@
 [
   {
     "title": "No articles found",
-    "link": "https://arxiv.org/list/astro-ph/new",
-    "authors": "",
+    "id": "https://arxiv.org/list/astro-ph/new",
+    "author": " ",
     "updated": "2025-05-05",
-    "abstract": "No articles matching the filters found in the current submissions."
+    "summary": "No articles matching the filters found in the current submissions."
   }
 ]
