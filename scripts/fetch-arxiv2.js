@@ -4,7 +4,7 @@ import { parseStringPromise } from 'xml2js';
 
 const ARXIV_URL = 'https://export.arxiv.org/api/query?search_query=cat:astro-ph*&sortBy=submittedDate&sortOrder=descending&max_results=100';
 
-const keywords = ['open cluster', 'star cluster', 'stellar cluster', 'cluster'];
+const keywords = ['open cluster', 'star cluster', 'stellar cluster'];
 
 async function main() {
   const res = await fetch(ARXIV_URL);
@@ -37,7 +37,7 @@ async function main() {
   // If no entries are to be saved, save a placeholder entry
   const entriesToSave = sortedEntries.length > 0 ? sortedEntries : [{ title: 'No articles found' }];
 
-  console.log(entriesToSave)
+  // console.log(entriesToSave)
 
   await fs.mkdir('data2', { recursive: true });
   await fs.writeFile(
