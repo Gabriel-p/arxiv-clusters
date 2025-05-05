@@ -1,7 +1,7 @@
 async function fetchPapers() {
   try {
     // const res = await fetch('arxiv.json');
-    const res = await fetch('/arxiv-clusters/data/arxiv.json');
+    const res = await fetch('/arxiv-clusters/arxiv.json');
     const data = await res.json();
     const entries = Array.isArray(data) ? data : [data];
 
