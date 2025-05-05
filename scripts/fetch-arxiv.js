@@ -25,8 +25,6 @@ async function main() {
         if (summary.includes(keyword)) score += 1;
       });
 
-      console.log(entry.title, score)
-
       return { ...entry, score };
     })
     .filter(entry => entry.score > 0); // Exclude entries with score=0
