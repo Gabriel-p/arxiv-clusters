@@ -1,0 +1,57 @@
+[
+  {
+    "id": "http://arxiv.org/abs/2505.02523v1",
+    "updated": "2025-05-05T10:01:16Z",
+    "published": "2025-05-05T10:01:16Z",
+    "title": "Supernova remnants in super bubbles as cosmic ray accelerators",
+    "summary": "  Supernova remnants (SNRs) are often considered as the main sites of\nacceleration of cosmic rays in our Galaxy, possibly up to the knee. However,\ntheir ability to accelerate particles to reach PeV energies is questionable and\nlacks observational evidence. Theoretical predictions suggest that only a small\nsubclass of very young SNRs evolving in dense environments could potentially\nsatisfy the necessary conditions to accelerate particles to PeV energies. Most\nsuch theoretical investigations are carried out either in the standard\ninterstellar medium or in the wind of the progenitor. Since most core collapse\nsupernovae occur in star clusters, it is important to extend such investigation\nto SNRs taking place in a star cluster. In this work we focus on a SNR shock\npropagating in the collective wind of a compact star cluster, and we study the\nacceleration process as a function time, with special emphasis on the maximum\nenergy of accelerated particles. Using both analytic and numerical approaches\nwe investigate the spectrum of accelerated particles and maximum achievable\nenergy in the case of pre-existing turbulence in the collective wind and\nself-generated magnetic perturbations. We find that similar to isolated SNRs,\nacceleration to PeV energies is plausible only for extreme conditions\nachievable only in a small subset of SNRs.\n",
+    "author": [
+      {
+        "name": "Iurii Sushch"
+      },
+      {
+        "name": "Pasquale Blasi"
+      },
+      {
+        "name": "Robert Brose"
+      }
+    ],
+    "arxiv:comment": {
+      "_": "11 pages, 6 figures, submitted to Astronomy & Astrophysics",
+      "$": {
+        "xmlns:arxiv": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "link": [
+      {
+        "$": {
+          "href": "http://arxiv.org/abs/2505.02523v1",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      },
+      {
+        "$": {
+          "title": "pdf",
+          "href": "http://arxiv.org/pdf/2505.02523v1",
+          "rel": "related",
+          "type": "application/pdf"
+        }
+      }
+    ],
+    "arxiv:primary_category": {
+      "$": {
+        "xmlns:arxiv": "http://arxiv.org/schemas/atom",
+        "term": "astro-ph.HE",
+        "scheme": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "category": {
+      "$": {
+        "term": "astro-ph.HE",
+        "scheme": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "score": 1
+  }
+]
