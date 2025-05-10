@@ -20,7 +20,7 @@ async function main() {
   // Filter entries by published date and keywords
   const scoredEntries = entries
     // Filter out entries older than the day before
-    .filter(entry => entry.published.startsWith(yesterdayStr)
+    .filter(entry => entry.published.startsWith(yesterdayStr))
     .map(entry => {
       const title = entry.title.toLowerCase();
       const summary = entry.summary.toLowerCase();
