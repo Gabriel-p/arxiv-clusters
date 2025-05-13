@@ -13,7 +13,7 @@ related to open clusters.
 <html lang="en">
   <body>
     <center>
-    <div id="sort-options"> Sort by:
+    <div id="arxivsort"> Sort by:
       <label><input type="radio" name="sort" value="updated" /> Date</label>
       <label><input type="radio" name="sort" value="score" /> Score</label>
     </div>
