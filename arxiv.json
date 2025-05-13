@@ -324,69 +324,6 @@
   },
   {
     "id": "http://arxiv.org/abs/2505.04794v1",
-    "updated": "2025-05-07T20:46:12Z",
-    "published": "2025-05-07T20:46:12Z",
-    "title": "Constraining the environment of compact binary mergers with self-lensing\n  signatures",
-    "summary": "  Gravitational waves (GWs) from coalescing binary black holes (BBHs) can come\nfrom different environments. GWs interact gravitationally with astrophysical\nobjects, which makes it possible to use gravitational lensing by nearby objects\n(self-lensing) to learn about their environments. We quantify the probability\nof self-lensing through the optical depth $\\tau$ for the main channels of\ndetectable GWs at frequencies $f_{\\rm GW}\\sim (1-10^3)\\,{\\rm Hz}$. We then\nanalyze the detectability of the lensing effect (imprint). In star clusters,\nthe probability of self-lensing by stellar-mass black holes (BHs) is low\n($\\tau\\simeq10^{-7}$), even when taking into account nearby BHs in resonant\ninteractions ($\\tau\\simeq 10^{-5}$). Additionally, the lensing imprint of a\nstellar-mass lens (diffraction and interference) is too marginal to be\ndetectable by the LIGO-Virgo-KAGRA detectors and most Einstein Telescope\nsignals. For a massive BH lens in the center of a cluster, the probability can\nreach $\\tau\\simeq 10^{-4}$ either via von Zeipel-Lidov-Kozai induced mergers of\nBBHs orbiting a central massive BH or BBHs formed as GW captures in\nsingle-single interactions in the Bahcall-Wolf cusp of a nuclear cluster,\nlikely eccentric. For self-lensing by a supermassive BH for BBHs in the\nmigration trap of an AGN (active galactic nucleus) disk, $\\tau \\simeq 10^{-2}$.\nThe imprint of these massive lenses are two images that are easily detectable\nalready in current detectors. Moreover, AGN disk merger signals have a distinct\nlinear $h_+$ polarization. The probability depends on the extent of the\ndetectability through the threshold impact parameter $y_{\\rm max}$, which can\nincrease for future detectors. We conclude that constraining the environment of\nBBHs is possible by combining self-lensing imprints with other waveform\nsignatures such as eccentricity and polarization.\n",
-    "author": [
-      {
-        "name": "Helena Ubach"
-      },
-      {
-        "name": "Mark Gieles"
-      },
-      {
-        "name": "Jordi Miralda-Escudé"
-      }
-    ],
-    "arxiv:comment": {
-      "_": "Comments welcome",
-      "$": {
-        "xmlns:arxiv": "http://arxiv.org/schemas/atom"
-      }
-    },
-    "link": [
-      {
-        "$": {
-          "href": "http://arxiv.org/abs/2505.04794v1",
-          "rel": "alternate",
-          "type": "text/html"
-        }
-      },
-      {
-        "$": {
-          "title": "pdf",
-          "href": "http://arxiv.org/pdf/2505.04794v1",
-          "rel": "related",
-          "type": "application/pdf"
-        }
-      }
-    ],
-    "arxiv:primary_category": {
-      "$": {
-        "xmlns:arxiv": "http://arxiv.org/schemas/atom",
-        "term": "astro-ph.HE",
-        "scheme": "http://arxiv.org/schemas/atom"
-      }
-    },
-    "category": [
-      {
-        "$": {
-          "term": "astro-ph.HE",
-          "scheme": "http://arxiv.org/schemas/atom"
-        }
-      },
-      {
-        "$": {
-          "term": "astro-ph.CO",
-          "scheme": "http://arxiv.org/schemas/atom"
-        }
-      }
-    ],
-    "score": 1
-  },
-  {
-    "id": "http://arxiv.org/abs/2505.04794v1",
     "updated": "2025-04-07T20:46:12Z",
     "published": "2025-05-07T20:46:12Z",
     "title": "Test article",
@@ -447,5 +384,93 @@
       }
     ],
     "score": 10
+  },
+  {
+    "id": "http://arxiv.org/abs/2505.04534v1",
+    "updated": "2025-05-07T16:09:22Z",
+    "published": "2025-05-07T16:09:22Z",
+    "title": "PANCAKE: Python bAsed Numerical Color-magnitude-diagram Analysis pacKagE",
+    "summary": "  Stellar populations serve as a fossil record of galaxy formation and\nevolution, providing crucial information about the history of star formation\nand galaxy evolution. The color-magnitude diagram (CMD) stands out as the most\naccurate tool currently available for inferring the star formation histories\n(SFHs) of nearby galaxies with stellar-resolved multiband data. The launch of\nnew space telescopes, including JWST, EUCLID, and the upcoming CSST and Roman,\nwill significantly increase the number of stellar-resolved galaxies over the\nnext decade. A user-friendly and customizable CMD fitting package would be\nvaluable for galaxy evolution studies with these data. We develop an\nopen-source Python-based package named \\textsc{pancake}, which is fast and\naccurate in determining SFHs and stellar population parameters in nearby\ngalaxies. We have validated our method via a series of comprehensive tests.\nFirst, \\textsc{pancake} performs well on mock data, meanwhile the random and\nsystematic uncertainties are quantified. Second, \\textsc{pancake} performs well\non observational data containing a star cluster and 38 dwarf galaxies (50\nfields). Third, the star formation rate (SFR) from \\textsc{pancake} is\nconsistent with the SFR from FUV photometry. To ensure compatibility and\naccuracy, we have included isochrone libraries generated using PARSEC for most\nof the optical and near-infrared filters used in space telescopes such as HST,\nJWST, and the upcoming CSST.\n",
+    "author": [
+      {
+        "name": "Yun Zheng"
+      },
+      {
+        "name": "Yujiao Yang"
+      },
+      {
+        "name": "Yong-kun Zhang"
+      },
+      {
+        "name": "Zheng Zheng"
+      },
+      {
+        "name": "Jing Wang"
+      },
+      {
+        "name": "Lister Staveley-Smith"
+      },
+      {
+        "name": "Chao-Wei Tsai"
+      },
+      {
+        "name": "Di Li"
+      },
+      {
+        "name": "Chao Liu"
+      },
+      {
+        "name": "Jingjing Hu"
+      },
+      {
+        "name": "Huaxi Chen"
+      },
+      {
+        "name": "Donghui Quan"
+      },
+      {
+        "name": "Yinghui Zheng"
+      },
+      {
+        "name": "Hangyuan Li"
+      }
+    ],
+    "arxiv:comment": {
+      "_": "26 pages, 24 figures, accepted by APJS",
+      "$": {
+        "xmlns:arxiv": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "link": [
+      {
+        "$": {
+          "href": "http://arxiv.org/abs/2505.04534v1",
+          "rel": "alternate",
+          "type": "text/html"
+        }
+      },
+      {
+        "$": {
+          "title": "pdf",
+          "href": "http://arxiv.org/pdf/2505.04534v1",
+          "rel": "related",
+          "type": "application/pdf"
+        }
+      }
+    ],
+    "arxiv:primary_category": {
+      "$": {
+        "xmlns:arxiv": "http://arxiv.org/schemas/atom",
+        "term": "astro-ph.GA",
+        "scheme": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "category": {
+      "$": {
+        "term": "astro-ph.GA",
+        "scheme": "http://arxiv.org/schemas/atom"
+      }
+    },
+    "score": 1
   }
 ]
