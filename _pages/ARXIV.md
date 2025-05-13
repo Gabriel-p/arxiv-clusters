@@ -1,5 +1,5 @@
 ---
-layout: arxiv
+layout: page
 title: arXiv open cluster articles
 permalink: /arxiv/
 ---
@@ -9,7 +9,6 @@ related to open clusters.
 
 ---
 
-
 <html lang="en">
   <body>
     <center>
@@ -18,5 +17,8 @@ related to open clusters.
       <label><input type="radio" name="sort" value="score" /> Score</label>
     </div>
     </center>
+    <br>
+    <!-- Load articles -->
+    <script defer src="{{ site.baseurl }}/scripts/parse-arxiv.js"></script>
   </body>
 </html>
