@@ -30,28 +30,3 @@ body {
     </div>
   </template>
 
-<!-- Focus on search bar on load -->
-<script>document.getElementById("search").focus();</script>
-
-<!-- Function to open the first search result on 'Enter' -->
-<script>
-  document.getElementById("search").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevent form submission or default behavior
-
-      // Select the first result's anchor link within 'user-cards' container
-      const firstResult = document.querySelector(".user-cards .card a");
-
-      // Open the first result if it exists
-      if (firstResult) {
-        window.location.href = firstResult.getAttribute("href");
-      }
-    }
-  });
-</script>
-
-<!-- Load search bar -->
-<script defer src="{{ site.baseurl }}/assets/euclidean-search.js"></script>
-
-<!-- Compression library used to access the compressed JSON file -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.11/pako.min.js"></script>

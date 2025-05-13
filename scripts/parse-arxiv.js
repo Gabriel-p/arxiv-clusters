@@ -1,42 +1,95 @@
+// async function fetchPapers() {
+//   try {
+//     // Fetch latest version
+//     const res = await fetch("https://raw.githubusercontent.com/ucc23/ucc/refs/heads/main/arxiv.json");
+
+//     const data = await res.json();
+//     const entries = Array.isArray(data) ? data : [data];
+
+//     const list = document.getElementById('papers');
+//     entries.forEach(entry => {
+//       const li = document.createElement('li');
+//       li.className = 'paper';
+
+//       const title = entry.title.trim();
+//       const link = entry.id?.trim() || '#';
+//       const authors = entry.author ? entry.author.map(a => a.name).join(', ') : 'N/A';
+//       const updated = entry.updated ? new Date(entry.updated).toLocaleDateString() : 'N/A';
+//       const abstract = entry.summary?.trim() || '';
+
+//       li.innerHTML = `
+//         <a class="title" href="${link}" target="_blank">${title}</a>
+//         <div class="meta">${authors} — ${updated} — Score: ${entry.score}</div>
+//         <p class="abstract">${abstract}</p>
+//       `;
+
+//       list.appendChild(li);
+//     });
+//   } catch (err) {
+//     console.error('Error fetching or parsing arXiv data:', err.message, err);
+//   }
+// }
+
+// window.addEventListener('DOMContentLoaded', fetchPapers);
+
 async function fetchPapers() {
   try {
-
-    // For local build
-    // const res = await fetch('/arxiv.json');
-    // For live build
-    // const res = await fetch('/arxiv-clusters/arxiv.json');
-
-    // Determine the path based on the environment
-    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const filePath = isLocal ? '/arxiv.json' : '/arxiv-clusters/arxiv.json';
-    // Fetch the file
-    const res = await fetch(filePath);
+    // Fetch latest version
+    const res = await fetch("https://raw.githubusercontent.com/ucc23/ucc/refs/heads/main/arxiv.json");
 
     const data = await res.json();
-    const entries = Array.isArray(data) ? data : [data];
+    let entries = Array.isArray(data) ? data : [data];
 
     const list = document.getElementById('papers');
-    entries.forEach(entry => {
-      const li = document.createElement('li');
-      li.className = 'paper';
+    const sortSelector = document.getElementById('sort-selector');
 
-      const title = entry.title.trim();
-      const link = entry.id?.trim() || '#';
-      const authors = entry.author ? entry.author.map(a => a.name).join(', ') : 'N/A';
-      const updated = entry.updated ? new Date(entry.updated).toLocaleDateString() : 'N/A';
-      const abstract = entry.summary?.trim() || '';
+    // Function to render sorted entries
+    function renderEntries(sortedEntries) {
+      list.innerHTML = ''; // Clear existing entries
+      sortedEntries.forEach(entry => {
+        const li = document.createElement('li');
+        li.className = 'paper';
 
-      li.innerHTML = `
-        <a class="title" href="${link}" target="_blank">${title}</a>
-        <div class="meta">${authors} — ${updated}</div>
-        <p class="abstract">${abstract}</p>
-      `;
+        const title = entry.title.trim();
+        const link = entry.id?.trim() || '#';
+        const authors = entry.author ? entry.author.map(a => a.name).join(', ') : 'N/A';
+        const updated = entry.updated ? new Date(entry.updated).toLocaleDateString() : 'N/A';
+        const abstract = entry.summary?.trim() || '';
 
-      list.appendChild(li);
+        li.innerHTML = `
+          <a class="title" href="${link}" target="_blank">${title}</a>
+          <div class="meta">${authors} — ${updated} — Score: ${entry.score}</div>
+          <p class="abstract">${abstract}</p>
+        `;
+
+        list.appendChild(li);
+      });
+    }
+
+    // Sorting handler
+    sortSelector.addEventListener('change', () => {
+      const sortBy = sortSelector.value;
+
+      const sortedEntries = [...entries].sort((a, b) => {
+        if (sortBy === 'updated') {
+          return new Date(b.updated) - new Date(a.updated);
+        } else if (sortBy === 'score') {
+          return (b.score || 0) - (a.score || 0);
+        }
+        return 0;
+      });
+
+      renderEntries(sortedEntries);
     });
+
+    // Initial render
+    renderEntries(entries);
   } catch (err) {
     console.error('Error fetching or parsing arXiv data:', err.message, err);
   }
 }
 
-window.addEventListener('DOMContentLoaded', fetchPapers);
+window.addEventListener('DOMContentLoaded', () => {
+  fetchPapers();
+});
+
