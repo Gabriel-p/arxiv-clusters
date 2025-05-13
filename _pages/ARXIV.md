@@ -19,6 +19,7 @@ related to open clusters.
     </center>
     <br>
     <!-- Load articles -->
+    <div id="papers"></div>
     <script defer src="{{ site.baseurl }}/scripts/parse-arxiv.js"></script>
   </body>
 </html>
