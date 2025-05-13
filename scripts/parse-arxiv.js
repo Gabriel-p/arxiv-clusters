@@ -7,7 +7,7 @@ async function fetchPapers() {
     let entries = Array.isArray(data) ? data : [data];
 
     const list = document.getElementById('papers');
-    const sortOptions = document.getElementById('sort-options');
+    const sortOptions = document.getElementById('arxivsort');
 
     // Function to render sorted entries
     function renderEntries(sortedEntries) {

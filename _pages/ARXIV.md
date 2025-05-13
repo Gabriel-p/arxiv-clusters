@@ -1,5 +1,5 @@
 ---
-layout: arxiv
+layout: page
 title: arXiv open cluster articles
 permalink: /arxiv/
 ---
@@ -9,10 +9,18 @@ related to open clusters.
 
 ---
 
-<select id="sort-selector">
-  <option value="">Sort By</option>
-  <option value="updated">Date Updated</option>
-  <option value="score">Score</option>
-</select>
-<ul id="papers"></ul>
+<html lang="en">
+  <body>
+    <center>
+    <div id="arxivsort"> Sort by:
+      <label><input type="radio" name="sort" value="updated" /> Date</label>
+      <label><input type="radio" name="sort" value="score" /> Score</label>
+    </div>
+    </center>
+    <br>
+    <!-- Load articles -->
+    <ul id="papers"></ul>
+    <script defer src="{{ site.baseurl }}/scripts/parse-arxiv.js"></script>
+  </body>
+</html>
 
