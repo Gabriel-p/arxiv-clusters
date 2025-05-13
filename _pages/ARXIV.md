@@ -9,10 +9,16 @@ related to open clusters.
 
 ---
 
-<select id="sort-selector">
-  <option value="">Sort By</option>
-  <option value="updated">Date Updated</option>
-  <option value="score">Score</option>
-</select>
+<div id="sort-options">
+  <label>
+    <input type="radio" name="sort" value="updated" />
+    Sort by Date Updated
+  </label>
+  <label>
+    <input type="radio" name="sort" value="score" />
+    Sort by Score
+  </label>
+</div>
 <ul id="papers"></ul>
+
 
