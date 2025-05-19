@@ -35,12 +35,12 @@ interactive map of the sky with all the clusters in the UCC.
     <div class="image-container">
         <div class="image-box">
             <a data-umami-event="tables" href="{{ site.baseurl }}/tables">
-                <img src="/images/tables_screns_120525.webp" alt="Example Image" width="330" height="282">
+                <img src="{{ site.baseurl }}/images/tables_screns_120525.webp" alt="Example Image" width="330" height="282">
             </a>
         </div>
         <div class="image-box">
             <a data-umami-event="map" href="{{ site.baseurl }}/map">
-                <img src="/images/map_screns_120525.webp" alt="Example Image" width="330" height="282">
+                <img src="{{ site.baseurl }}/images/map_screns_120525.webp" alt="Example Image" width="330" height="282">
             </a>
         </div>
     </div>
