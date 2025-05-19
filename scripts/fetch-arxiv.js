@@ -2,18 +2,21 @@ import { promises as fs } from 'fs';
 import fetch from 'node-fetch';
 import { parseStringPromise } from 'xml2js';
 
-const ARXIV_URL = 'https://export.arxiv.org/api/query?search_query=cat:astro-ph.GA*&sortBy=submittedDate&sortOrder=descending&max_results=100';
-const keywords = ['open cluster', 'star cluster', 'stellar cluster'];
+const ARXIV_URL = 'https://export.arxiv.org/api/query?search_query=cat:astro-ph.GA*&sortBy=submittedDate&sortOrder=descending&max_results=200';
+
+// Keywords to filter and score entries
+const keywords = [
+  { term: 'open cluster', weight: 1.5 },
+  { term: 'star cluster', weight: 1 },
+  { term: 'stellar cluster', weight: 0.5 },
+];
+
 
 async function main() {
-  // Load existing entries from arxiv.json, if the file exists
+  // Load existing entries from arxiv.json, assume it exists
   let existingEntries = [];
-  try {
-    const data = await fs.readFile('arxiv.json', 'utf-8');
-    existingEntries = JSON.parse(data);
-  } catch (err) {
-    if (err.code !== 'ENOENT') throw err; // Ignore if file doesn't exist
-  }
+  const data = await fs.readFile('arxiv.json', 'utf-8');
+  existingEntries = JSON.parse(data);
 
   // Calculate the date 7 days back
   const date7DaysBack = new Date();
@@ -21,9 +24,10 @@ async function main() {
   const date7DaysBackStr = date7DaysBack.toISOString().split('T')[0];
 
   // Filter out entries older than 7 days from the existing data
-  existingEntries = existingEntries.filter(entry => entry.published >= date7DaysBackStr);
+  existingEntries = existingEntries.entries.filter(entry => entry.published >= date7DaysBackStr);
 
   // Fetch XML data from arXiv
+  const fetchTimestamp = new Date().toISOString(); // Capture the fetch timestamp
   const res = await fetch(ARXIV_URL);
   const xml = await res.text();
   const obj = await parseStringPromise(xml, { explicitArray: false });
@@ -38,9 +42,9 @@ async function main() {
 
       // Calculate the score
       let score = 0;
-      keywords.forEach(keyword => {
-        if (title.includes(keyword)) score += 2;
-        if (summary.includes(keyword)) score += 1;
+      keywords.forEach(({ term, weight }) => {
+        if (title.includes(term)) score += 2 * weight;
+        if (summary.includes(term)) score += 1 * weight;
       });
 
       return { ...entry, score };
@@ -69,10 +73,16 @@ async function main() {
         summary: 'No articles matching the filters were found in the current submissions.',
       }];
 
+  // Add the fetch timestamp to the JSON object
+  const outputData = {
+    fetched_at: fetchTimestamp,
+    entries: entriesToSave,
+  };
+
   // Save the updated entries to arxiv.json
   await fs.writeFile(
     'arxiv.json',
-    JSON.stringify(entriesToSave, null, 2),
+    JSON.stringify(outputData, null, 2),
     'utf-8'
   );
 }
