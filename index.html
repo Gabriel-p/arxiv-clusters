@@ -41,17 +41,11 @@ body {
 
 <!-- Function to open the first search result on 'Enter' -->
 <script defer>
-  document.getElementById("search").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevent form submission or default behavior
-
-      // Select the first result's anchor link within 'user-cards' container
-      const firstResult = document.querySelector(".user-cards .card a");
-
-      // Open the first result if it exists
-      if (firstResult) {
-        window.location.href = firstResult.getAttribute("href");
-      }
+  document.getElementById("search").onkeydown = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const a = document.querySelector(".user-cards .card a");
+      if (a) location.href = a.href;
     }
-  });
+  };
 </script>
