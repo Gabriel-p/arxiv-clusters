@@ -29,20 +29,3 @@ body {
       <div class="body_3" data-body_3></div>
     </div>
   </template>
-
-<!-- Compression library used to access the compressed JSON file -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.11/pako.min.js"></script>
-
-<!-- Load search bar -->
-<script defer src="{{ site.baseurl }}/scripts/euclidean-search.js"></script>
-
-<!-- Function to open the first search result on 'Enter' -->
-<script defer>
-  document.getElementById("search").onkeydown = e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const a = document.querySelector(".user-cards .card a");
-      if (a) location.href = a.href;
-    }
-  };
-</script>
