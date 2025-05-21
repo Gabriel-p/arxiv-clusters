@@ -7,7 +7,7 @@ on:
   #   branches: ["main"]
   schedule:
     # every 6 hours at minute 0 UTC
-    - cron: '0 */6 * * *'
+    # - cron: '0 */6 * * *'
   # Allow manual triggering
   workflow_dispatch:
 
