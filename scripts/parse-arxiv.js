@@ -1,9 +1,9 @@
 async function fetchPapers() {
   try {
     // Fetch latest version
-    const res = await fetch("https://raw.githubusercontent.com/Gabriel-p/arxiv-clusters/refs/heads/main/arxiv.json");
+    // const res = await fetch("https://raw.githubusercontent.com/Gabriel-p/arxiv-clusters/refs/heads/main/arxiv.json");
     // Fetch local version for testing
-    // const res = await fetch("../arxiv.json");
+    const res = await fetch("assets/arxiv.json");
     const data = await res.json();
 
     // Extract fetched_at value
