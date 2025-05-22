@@ -1,5 +1,25 @@
+const userCardTemplate = document.querySelector("[data-user-template]");
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
+
+// Fetch and decompress data
+fetch("assets/clusters.jsonl.gz")
+    .then(response => response.arrayBuffer())
+    .then(buffer => {
+        const decompressed = pako.ungzip(new Uint8Array(buffer), { to: "string" });
+        // Split into lines and filter empty ones
+        const lines = decompressed.split('\n').filter(line => line.trim() !== '');
+        // Parse each line and convert to an array of objects
+
+        // ["N","F","R","D","L","B","P","M"]
+        users = lines.map(line => {
+            const [N,F,R,D,L,B,P,M] = JSON.parse(line);
+            return { N,F,R,D,L,B,P,M };
+        });
+
+    })
+    .catch(error => console.error("Error fetching or decompressing data:", error));
+
 
 // Function to handle search input
 searchInput.addEventListener("input", (event) => {
@@ -15,39 +35,34 @@ searchInput.addEventListener("input", (event) => {
 
     const results = users
         .map(user => {
-            let distance = Infinity, matchType = null;
-            if (terms[0].match(/^\d/)) {
-                // RA/DEC search
-                distance = Math.hypot(parseFloat(terms[0]) - user.RA, parseFloat(terms[1]) - user.DEC);
-                matchType = "ra_dec";
-            } else if (terms[0] === "g") {
-                // GLON/GLAT search
-                distance = Math.hypot(parseFloat(terms[1]) - user.GLON, parseFloat(terms[2]) - user.GLAT);
-                matchType = "galactic";
-            } else {
-                // Removes spaces, underscores, periods, and hyphens and the 'g' flag
-                // Replaces '+' with 'p'
-                const normalizedQuery = query.replace(/[\s_.\-]/g, "").replace(/\+/g, "p");
-                // Only search the string distance if the first three chars are present
-                // in the user.fnames
-                if (user.fnames.includes(normalizedQuery.slice(0, 3))) {
-                    distance = Math.min(...user.fnames.split(";").map(fname =>
-                        stringDifference(normalizedQuery, fname)
-                    ));
-                    matchType = "name";
-                }
-            }
+            let distance = Infinity;
 
-            return { ...user, distance, matchType };
+            // Removes spaces, underscores, periods, and hyphens and the 'g' flag
+            // Replaces '+' with 'p'
+            const normalizedQuery = query.replace(/[\s_.\-]/g, "").replace(/\+/g, "p");
+            // Only search the string distance if the first three chars are present
+            // in the user.fnames
+            if (user.F.includes(normalizedQuery.slice(0, 3))) {
+                distance = Math.min(...user.F.split(",").map(fname =>
+                    stringDifference(normalizedQuery, fname)
+                ));
+            }
+            return { ...user, distance };
         })
         // This is a reasonable value for both string an euclidean search
-        .filter(user => user.distance < 5)
+        .filter(user => user.distance < .5)
         .sort((a, b) => a.distance - b.distance)
         .slice(0, 9);
 
     // Append new results
     results.forEach(user => {
-        const element = user[`element_${user.matchType === "name" ? 1 : user.matchType === "galactic" ? 2 : 3}`];
+        const element = userCardTemplate.content.cloneNode(true).children[0];
+        const header = element.querySelector("[data-header]");
+        const body = element.querySelector("[data-body]");
+        const href = `./_clusters/${user.F.split(",")[0]}`;
+        element.querySelector("a").setAttribute("href", href);
+        header.textContent = user.N;
+        body.textContent = user.F.split(',').slice(1, 3).join(", ");
         userCardContainer.appendChild(element);
     });
 });
@@ -97,40 +112,3 @@ const stringDifference = (str1, str2) => {
 
     return Math.min(norm_diff, norm_l_dist)
 };
-
-// Fetch and decompress data
-// fetch("clusters.json.gz")
-//     .then(response => response.arrayBuffer())
-//     .then(buffer => {
-//         const decompressed = pako.ungzip(new Uint8Array(buffer), { to: "string" });
-//         const data = JSON.parse(decompressed);
-
-//         users = data.map(entry => {
-//             const template = userCardTemplate.content.cloneNode(true);
-//             const elements = ["element_1", "element_2", "element_3"].map((key, i) => {
-//                 const clone = template.cloneNode(true).children[0];
-//                 const header = clone.querySelector("[data-header]");
-//                 const body = clone.querySelector(`[data-body_${i + 1}]`);
-//                 const href = `./_clusters/${entry.F.split(";")[0]}`;
-                
-//                 clone.querySelector("a").setAttribute("href", href);
-//                 header.textContent = entry.N;
-
-//                 if (i === 0) body.textContent = entry.F.split(";").slice(1, 3).join(", ");
-//                 if (i === 1) body.textContent = `G (${entry.L}, ${entry.B})`;
-//                 if (i === 2) body.textContent = `E (${entry.R}, ${entry.D})`;
-
-//                 return { key, element: clone };
-//             });
-
-//             return {
-//                 fnames: entry.F,
-//                 GLON: entry.L,
-//                 GLAT: entry.B,
-//                 RA: entry.R,
-//                 DEC: entry.D,
-//                 ...Object.fromEntries(elements.map(({ key, element }) => [key, element]))
-//             };
-//         });
-//     })
-//     .catch(error => console.error("Error fetching or decompressing data:", error));

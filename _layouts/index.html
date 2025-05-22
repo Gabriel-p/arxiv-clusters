@@ -52,16 +52,6 @@
       </div>
     </div>
 
-<!--   <script>
-    // Defer loading the euclidean-search-js script until after the page is fully loaded
-    window.addEventListener('load', function() {
-      const script = document.createElement('script');
-      script.src = "{{ site.baseurl }}/scripts/euclidean-search.js";
-      script.async = true; // Ensures non-blocking behavior
-      document.body.appendChild(script);
-    });
-  </script> -->
-
   <!-- Compression library used to access the compressed JSON file -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pako/1.0.11/pako.min.js"></script>
 
@@ -78,9 +68,6 @@
       }
     };
   </script>
-
-  <script defer src="{{ site.baseurl }}/scripts/load_json.js"></script>
-
     
   </body>
 </html>
